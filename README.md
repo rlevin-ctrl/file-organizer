@@ -1,13 +1,13 @@
 ﻿# file-organizer
 
-CLI-застосунок на Node.js для аналізу, організації та очищення директорій (Downloads, Videos тощо).
+CLI tool built with Node.js for analyzing, organizing, and cleaning up directories (Downloads, Videos, etc.).
 
-## Вимоги
+## Requirements
 
-- Node.js 18+ (перевірено на 24.x)
+- Node.js 18+
 - npm
 
-## Встановлення
+## Installation
 
 ```bash
 git clone https://github.com/<your-username>/file-organizer.git
@@ -15,55 +15,55 @@ cd file-organizer
 npm install
 ```
 
-(якщо залежностей через npm немає, `npm install` нічого не встановить, але лишити команду можна).
+(If there are no npm dependencies, `npm install` will not install anything, but you can still keep this command.)
 
-## Команди
+## Commands
 
 ### 1. scan
 
-Рекурсивний аналіз директорії: кількість файлів, розмір, типи, вік, топ-3 найбільших, найстаріший файл.
+Recursively analyzes a directory: number of files, total size, file types, age distribution, top-3 largest files, and the oldest file.
 
 ```bash
-npm run scan -- C:\Users\<імʼя>\Downloads
-# або
-node file-organizer.js scan C:\Users\<імʼя>\Downloads
+npm run scan -- C:\Users\<username>\Downloads
+# or
+node file-organizer.js scan C:\Users\<username>\Downloads
 ```
 
 ### 2. duplicates
 
-Пошук дублікатів за SHA-256 хешем вмісту файлів (використовуються streams).
+Finds duplicate files by SHA-256 hash of their contents (uses streams).
 
 ```bash
-npm run duplicates -- C:\Users\<імʼя>\Downloads
-# або
-node file-organizer.js duplicates C:\Users\<імʼя>\Downloads
+npm run duplicates -- C:\Users\<username>\Downloads
+# or
+node file-organizer.js duplicates C:\Users\<username>\Downloads
 ```
 
 ### 3. organize
 
-Копіювання файлів по категоріях (Documents, Images, Archives, Code, Videos, Other) у цільову директорію.
+Copies files into category folders (Documents, Images, Archives, Code, Videos, Other) in the target directory.
 
 ```bash
-npm run organize -- C:\Users\<імʼя>\Downloads --output C:\Users\<імʼя>\Organized
-# або
-node file-organizer.js organize C:\Users\<імʼя>\Downloads --output C:\Users\<імʼя>\Organized
+npm run organize -- C:\Users\<username>\Downloads --output C:\Users\<username>\Organized
+# or
+node file-organizer.js organize C:\Users\<username>\Downloads --output C:\Users\<username>\Organized
 ```
 
-Оригінальні файли не видаляються.
+Original files are not deleted.
 
 ### 4. cleanup
 
-Пошук і видалення файлів старших за N днів.
+Finds and deletes files older than N days.
 
 ```bash
-# тільки показати список (dry run)
-npm run cleanup -- C:\Users\<імʼя>\Downloads --older-than 90
+# show list only (dry run)
+npm run cleanup -- C:\Users\<username>\Downloads --older-than 90
 
-# показати список і видалити (після підтвердження параметром --confirm)
-npm run cleanup -- C:\Users\<імʼя>\Downloads --older-than 90 --confirm
+# show list and delete (with --confirm flag)
+npm run cleanup -- C:\Users\<username>\Downloads --older-than 90 --confirm
 ```
 
-## Структура проєкту
+## Project structure
 
 ```text
 file-organizer/
@@ -72,8 +72,8 @@ file-organizer/
 ├── README.md
 ├── file-organizer.js
 └── lib/
-    ├── scanner.js      # команда scan (EventEmitter, статистика по файлам)
-    ├── duplicates.js   # команда duplicates (SHA-256, streams)
-    ├── organizer.js    # команда organize (категорії, копіювання, streams ≥10MB)
-    └── cleanup.js      # команда cleanup (вік файлів, dry run, видалення)
+    ├── scanner.js      # scan command (EventEmitter, file statistics)
+    ├── duplicates.js   # duplicates command (SHA-256, streams)
+    ├── organizer.js    # organize command (categories, copying, streams ≥10MB)
+    └── cleanup.js      # cleanup command (file age, dry run, deletion)
 ```
